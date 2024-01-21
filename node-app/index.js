@@ -1,5 +1,7 @@
 const express = require('express');
 const cors = require('cors');
+//const path = require('path');
+
 var jwt = require('jsonwebtoken');
 const multer = require('multer');
 const storage = multer.diskStorage({
@@ -14,7 +16,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage })
 const bodyParser = require('body-parser')
-const app = express()
+const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false }));
@@ -27,7 +29,11 @@ console.log('Mongoose version', mongoose.version);
 
 // mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
 
-mongoose.connect('mongodb://localhost:27017/test');
+//mongoose.connect('mongodb://localhost:27017/test');
+
+mongoose.connect('mongodb://127.0.0.1:27017/test');//, { useNewUrlParser: true, useUnifiedTopology: true })
+//   .then(() => console.log('Connected to MongoDB'))
+//   .catch(error => console.error('Error connecting to MongoDB:', error));
 
 const Users = mongoose.model('Users', { username: String, password: String });
 const Products = mongoose.model('Products', { pname: String, pdesc: String, price: String, category : String, pimage: String });
